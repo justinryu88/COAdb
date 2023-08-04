@@ -32,7 +32,8 @@
             padding: 10px;
             border: 2px solid #0b9444;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 12px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         input[type="submit"] {
@@ -43,6 +44,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         input[type="submit"]:hover {
@@ -69,16 +71,44 @@
         a {
             color: #0b9444;
         }
+
+      select {
+            margin-right: 10px;
+            border: 2px solid #0b9444;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
     </style>
+
+    <script>
+        function updatePlaceholder() {
+            var select = document.querySelector('select[name="folder"]');
+            var searchInput = document.querySelector('input[name="search_term"]');
+            if (select.value === "COA") {
+                searchInput.placeholder = "Enter Lot Number";
+            } else if (select.value === "SDS") {
+                searchInput.placeholder = "Enter Product Name";
+            } else if (select.value === "Formula") {
+                searchInput.placeholder = "Enter Key Words";
+            }
+        }
+      window.onload = updatePlaceholder;
+    </script>
+  
 </head>
 <body>
     <h1>COA Database</h1>
 
     <!-- Form to submit search term -->
-    <form method="GET" action="/">
-        <input type="text" name="search_term" placeholder="Enter Lot Number" value="{{ search_term or '' }}">
-        <input type="submit" value="Search">
-    </form>
+<form method="GET" action="/">
+    <select name="folder" onchange="updatePlaceholder()">
+        <option value="COA" {% if selected_folder == 'COA' %} selected {% endif %}>COA</option>
+        <option value="SDS" {% if selected_folder == 'SDS' %} selected {% endif %}>SDS</option>
+        <option value="Formula" {% if selected_folder == 'Formula' %} selected {% endif %}>Formula</option>
+    </select>
+    <input type="text" name="search_term" placeholder="Enter Lot Number" value="{{ search_term or '' }}">
+    <input type="submit" value="Search">
+</form>
 
     <table>
         <thead>
