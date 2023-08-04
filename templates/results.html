@@ -32,8 +32,9 @@
             padding: 10px;
             border: 2px solid #0b9444;
             border-radius: 4px;
-            font-size: 12px;
+            font-size: 16px;
             font-family: 'Montserrat', sans-serif;
+             width: 30%;
         }
 
         input[type="submit"] {
@@ -54,7 +55,11 @@
         table {
             width: 60%;
             margin: 0 auto;
-            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden; 
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid #ddd;
         }
 
         td, th {
@@ -89,7 +94,7 @@
             } else if (select.value === "SDS") {
                 searchInput.placeholder = "Enter Product Name";
             } else if (select.value === "Formula") {
-                searchInput.placeholder = "Enter Key Words";
+                searchInput.placeholder = "Enter Multiple Key Words";
             }
         }
       window.onload = updatePlaceholder;
@@ -97,8 +102,7 @@
   
 </head>
 <body>
-    <h1>COA Database</h1>
-
+    
     <!-- Form to submit search term -->
 <form method="GET" action="/">
     <select name="folder" onchange="updatePlaceholder()">
