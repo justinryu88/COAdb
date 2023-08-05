@@ -83,6 +83,19 @@
             border-radius: 4px;
             font-family: 'Montserrat', sans-serif;
         }
+
+
+       #search-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: white;  /* added this to ensure the search bar background is not transparent */
+        }
+
+        #table-container {
+            height: 80vh;  /* adjust this value as needed */
+            overflow: auto;
+        }
     </style>
 
     <script>
@@ -102,7 +115,7 @@
   
 </head>
 <body>
-    
+<div id="search-bar">    
     <!-- Form to submit search term -->
 <form method="GET" action="/">
     <select name="folder" onchange="updatePlaceholder()">
@@ -113,11 +126,12 @@
     <input type="text" name="search_term" placeholder="Enter Lot Number" value="{{ search_term or '' }}">
     <input type="submit" value="Search">
 </form>
-
+</div>
+   <div id="table-container"> 
     <table>
         <thead>
             <tr>
-                <th>File name</th>
+                <th>File Name</th>
                 <th>File Link</th>
             </tr>
         </thead>
@@ -130,5 +144,6 @@
             {% endfor %}
         </tbody>
     </table>
+   </div>
 </body>
 </html>
