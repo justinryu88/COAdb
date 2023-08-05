@@ -33,18 +33,20 @@ def search_files():
     # Get the selected folder from the form data, default to 'COA' if none is selected
     selected_folder = request.args.get('folder', 'COA')
 
-    # Call the Drive v3 API to list the files in the folder
-    folder_id, page_size = folders[selected_folder]
-    query = f"'{folder_id}' in parents"
-
     search_term = request.args.get('search_term')
-    if search_term:
+
+    items = []
+    if search_term:  # Only perform the search if a search term is provided
+        # Call the Drive v3 API to list the files in the folder
+        folder_id, page_size = folders[selected_folder]
+        query = f"'{folder_id}' in parents"
+
         query += f" and name contains '{search_term}'"
 
-    results = service.files().list(
-        q=query,
-        pageSize=page_size, fields="nextPageToken, files(id, name)").execute()
-    items = results.get('files', [])
+        results = service.files().list(
+            q=query,
+            pageSize=page_size, fields="nextPageToken, files(id, name)").execute()
+        items = results.get('files', [])
 
     return render_template('results.html', results=items, search_term=search_term, selected_folder=selected_folder)
 
