@@ -96,39 +96,79 @@
             height: 80vh;  /* adjust this value as needed */
             overflow: auto;
         }
+
+      .folder-option {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 7px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.folder-option:hover {
+    background-color: #f0f0f0;
+}
+
+  
     </style>
 
     <script>
-        function updatePlaceholder() {
-            var select = document.querySelector('select[name="folder"]');
-            var searchInput = document.querySelector('input[name="search_term"]');
-            if (select.value === "COA") {
-                searchInput.placeholder = "Enter Lot Number";
-            } else if (select.value === "SDS") {
-                searchInput.placeholder = "Enter Product Name";
-            } else if (select.value === "Formula") {
-                searchInput.placeholder = "Enter Multiple Key Words";
-            }
-        }
-      window.onload = updatePlaceholder;
+        function updatePlaceholder(folder) {
+    var searchInput = document.querySelector('input[name="search_term"]');
+    if (folder === "COA") {
+        searchInput.placeholder = "Enter Lot Number";
+    } else if (folder === "SDS") {
+        searchInput.placeholder = "Enter Product Name";
+    } else if (folder === "Formula") {
+        searchInput.placeholder = "Enter Multiple Key Words";
+    }
+}
+
+      function selectFolder(element) {
+    // Reset styles and attributes for all options
+    document.querySelectorAll('.folder-option').forEach(el => {
+        el.style.color = '#333';
+        el.setAttribute('data-selected', 'false');
+    });
+    
+    // Highlight and bold the selected option
+    element.style.color = '#0b9444';
+    element.setAttribute('data-selected', 'true');
+
+    // Update the hidden input with the selected value
+    document.getElementById('selected-folder').value = element.getAttribute('data-folder');
+
+    // Update the placeholder
+    updatePlaceholder(element.getAttribute('data-folder'));
+}
+
+window.onload = function() {
+    const initialSelected = document.querySelector('.folder-option[data-selected="true"]');
+    if (initialSelected) {
+        initialSelected.style.fontWeight = 'bold';
+    }
+    updatePlaceholder(document.getElementById('selected-folder').value);
+};
+
     </script>
   
 </head>
 <body>
-<div id="search-bar">    
-  <!-- Display an image only if there's no search term -->
-        
-        <!-- Form to submit search term -->
+<div id="search-bar">
     <!-- Form to submit search term -->
-<form method="GET" action="/">
-    <select name="folder" onchange="updatePlaceholder()">
-        <option value="COA" {% if selected_folder == 'COA' %} selected {% endif %}>COA</option>
-        <option value="SDS" {% if selected_folder == 'SDS' %} selected {% endif %}>SDS</option>
-        <option value="Formula" {% if selected_folder == 'Formula' %} selected {% endif %}>Formula</option>
-    </select>
-    <input type="text" name="search_term" placeholder="Enter Lot Number" value="{{ search_term or '' }}">
-    <input type="submit" value="Search">
-</form>
+    <form method="GET" action="/">
+        <div class="folder-option" data-folder="COA" onclick="selectFolder(this)" {% if selected_folder == 'COA' %} style="color: #0b9444;" {% endif %}>COA</div>
+        <div class="folder-option" data-folder="SDS" onclick="selectFolder(this)" {% if selected_folder == 'SDS' %} style="color: #0b9444;" {% endif %}>SDS</div>
+        <div class="folder-option" data-folder="Formula" onclick="selectFolder(this)" {% if selected_folder == 'Formula' %} style="color: #0b9444;" {% endif %}>Formula</div>
+
+        <!-- Hidden input to capture selected folder -->
+        <input type="hidden" name="folder" id="selected-folder" value="{{ selected_folder or 'COA' }}">
+        
+        <input type="text" name="search_term" placeholder="Enter Lot Number" value="{{ search_term or '' }}">
+        <input type="submit" value="Search">
+    </form>
 </div>
    <div id="table-container"> 
     <table>
