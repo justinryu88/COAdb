@@ -147,8 +147,13 @@
             {% endfor %}
         </tbody>
     </table>
-     {% if not search_term or not results %}
-        <center><img src="https://cdn.shopify.com/s/files/1/0281/8087/3356/files/no_results_clouds.png?v=1691292757" alt="Description of image" width="600px"></center>
+     {% if not search_term %}
+        <center><img src="https://cdn.shopify.com/s/files/1/0281/8087/3356/files/coadb_initial.png?v=1691465966" alt="Initial Image" width="40%"></center>
+        {% endif %}
+        
+        <!-- Display the no results image if search term exists but results are empty -->
+        {% if search_term and not results %}
+        <center><img src="https://cdn.shopify.com/s/files/1/0281/8087/3356/files/no_results_clouds.png?v=1691292757" alt="No Results Image" width="40%"></center>
         {% endif %}
    </div>
   
