@@ -19,6 +19,7 @@
 
     input[type="text"] {
         width: 100%;  /* Make the input fields take up the full width */
+        margin-bottom: 10px;
     }
 
     form {
@@ -28,20 +29,31 @@
     .folder-option {
         margin-bottom: 10px;
     }
+
+    .center-content img {
+        width: 100%;  /* Width for mobile */
+        
+    }
 }
 
       @media (min-width: 769px) {
     
     input[type="text"] {
         width: 30%;  /* Make the input fields take up the full width */
+        margin-right: 10px;
     }
 
     table {
     width: 60%;  /* Adjust table width */
 }
-    
+    .center-content img {
+        width: 40%;  /* Width for mobile */
+        
+    }
 }
-
+        * {
+    box-sizing: border-box;
+}  
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -66,7 +78,7 @@
         }
 
         input[type="text"] {
-            margin-right: 10px;
+            
             padding: 10px;
             border: 2px solid #0b9444;
             border-radius: 4px;
@@ -131,9 +143,11 @@
         }
 
         #table-container {
-            height: 80vh;  /* adjust this value as needed */
-            overflow: auto;
-        }
+    height: 80vh;
+    width: 100%;  /* This ensures that the container takes up full viewport width */
+    overflow: auto;
+    justify-content: center;
+}
 
       .folder-option {
     display: inline-block;
@@ -150,6 +164,8 @@
     background-color: #e0e0e0;
 }
 
+
+    
   
     </style>
 
@@ -227,14 +243,16 @@ window.onload = function() {
             {% endfor %}
         </tbody>
     </table>
-     {% if not search_term %}
-        <center><img src="https://cdn.shopify.com/s/files/1/0281/8087/3356/files/coadb_initial.png?v=1691465966" alt="Initial Image" width="40%"></center>
-        {% endif %}
-        
-        <!-- Display the no results image if search term exists but results are empty -->
-        {% if search_term and not results %}
-        <center><img src="https://cdn.shopify.com/s/files/1/0281/8087/3356/files/no_results_clouds.png?v=1691292757" alt="No Results Image" width="40%"></center>
-        {% endif %}
+{% if not search_term %}
+    <center><div class="center-content"><img src="https://cdn.shopify.com/s/files/1/0281/8087/3356/files/coadb_initial.png?v=1691465966" alt="Initial Image"></div></center>
+
+{% endif %}
+
+<!-- Display the no results image if search term exists but results are empty -->
+{% if search_term and not results %}
+    <center><div class="center-content"><img src="https://cdn.shopify.com/s/files/1/0281/8087/3356/files/no_results_clouds.png?v=1691292757" alt="No Results Image"></div></center>
+{% endif %}
+
    </div>
   
 </body>
