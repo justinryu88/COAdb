@@ -14,12 +14,13 @@
             padding: 0;
         }
 
-        h1 {
-            text-align: center;
-            padding: 20px;
-            background-color: #0b9444;
-            color: white;
-        }
+          h1 {
+      background: linear-gradient(to right, #4CB8C4 0%, #3CD3AD 51%, #4CB8C4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: background-image 0.5s ease-in-out;
+      font-size: 30px;font-weight: bold;
+    }
 
         form {
             display: flex;
@@ -157,6 +158,7 @@ window.onload = function() {
   
 </head>
 <body>
+<center><h1>Xenex Document Database</h1></center>
 <div id="search-bar">
     <!-- Form to submit search term -->
     <form method="GET" action="/">
