@@ -27,7 +27,7 @@ def search_files():
     folders = {
         'COA': ('1BTTgMBVhg8mG0dQ5H8e5KT-ltQUohS7B', 3),  # replace with your folder id and page size
         'SDS': ('1jK9zt2wXqWLnpyQqrk1at0cbMJdXElpi', 5),  # replace with your folder id and page size
-        'Formula': ('1Ee9JZQnIx5JO-qFGIxwGY7q5uBKXzIzJ', 50),  # replace with your folder id and page size
+        'Formula': ('1Ee9JZQnIx5JO-qFGIxwGY7q5uBKXzIzJ', 500),  # replace with your folder id and page size
     }
 
     # Get the selected folder from the form data, default to 'COA' if none is selected
